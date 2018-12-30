@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  # for persistence between restarts
+  redis-data: {}
+  data:
+    driver: local
+
+services:
+  bot:
+    build: .
+    command: ["--only", "API"]
+    container_name: my-life-rpg-bot_node
+    restart: on-failure
+    volumes:
+      - ./app:/bot
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - redis
+    environment:
+      - USE_DOCKER
+      - "FORCE_SSL=yes"
+    env_file:
+      - .env
+  redis:
+    image: redis:5.0.2-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    volumes:
+      - redis-data:/data
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"

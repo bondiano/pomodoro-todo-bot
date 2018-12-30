@@ -1,0 +1,29 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.tabSize": 2,
+    "cSpell.enabled": true,
+    "files.exclude": {
+        "tsconfig.build.json": true,
+    },
+    "tslint.autoFixOnSave": true,
+    "importSorter.generalConfiguration.sortOnBeforeSave": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": false,
+    "cSpell.words": [
+        "bondiano",
+        "callback",
+        "fastify",
+        "gamificated",
+        "paren",
+        "postgres",
+        "r",
+        "redis",
+        "session",
+        "tefegraf",
+        "telegraf",
+        "tsfmt",
+        "typedoc",
+        "typeorm",
+        "webhook"
+    ]
+}

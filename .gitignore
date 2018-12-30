@@ -1,0 +1,10 @@
+dist
+data/*
+swagger-dist
+doc
+node_modules
+.nyc_output
+coverage
+*.log
+npm-debug.log*
+.env
