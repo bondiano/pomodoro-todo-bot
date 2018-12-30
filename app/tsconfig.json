@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "newLine": "LF",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": false,
+        "noUnusedParameters": false,
+        "noUnusedLocals": true,
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strictNullChecks": false,
+        "strict": false,
+        "target": "es6",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        }
+    },
+    "compileOnSave": true,
+    "include": [
+        "./",
+        "src/**/*",
+        "test/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
