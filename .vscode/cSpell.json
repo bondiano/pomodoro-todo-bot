@@ -6,12 +6,17 @@
     "language": "en",
     // words - list of words to be always considered correct
     "words": [
+        "batbondik",
         "callback",
+        "com",
         "fastify",
         "gamificated",
+        "gmail",
         "i",
+        "middlewares",
         "n",
         "paren",
+        "pomodoro",
         "redis",
         "session",
         "telegraf",

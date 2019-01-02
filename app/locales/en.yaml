@@ -1,1 +1,17 @@
-greeting: 'Hello'
+greeting:
+  "Hi! I'm **Pomodoro TODO** bot.\n\n\
+  I'll help you to organize your day with using the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) and everyday TODO list.\n\n\
+  Send me /help for get more info."
+
+help:
+  "How can I assist you today, _${from.username}_?\n\n\
+  For select language use /lang command."
+
+language:
+  "Select language:"
+languageSelected:
+  "Now I will use english for talking with you."
+enButton:
+  "🇬🇧 English"
+ruButton:
+  "🇷🇺 Russian"

@@ -1,42 +1,30 @@
 import * as fastify from 'fastify';
 import { IncomingMessage, Server, ServerResponse } from 'http';
-import * as path from 'path';
-import Telegraf from 'telegraf';
-import TelegrafI18n from 'telegraf-i18n';
+import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
-// import RedisSession from 'telegraf-session-redis';
 import * as configs from '@/configs';
+import { registerActions, registerCommands } from '@/handlers';
+import { i18nMiddleware, sessionMiddleware } from '@/middlewares';
 
-const configApp = ({app, bot}): void => {
+const configApp = ({ app, bot }: {
+  app: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse>,
+  bot: Telegraf<ContextMessageUpdate>
+}): void => {
   app.use(bot.webhookCallback(configs.bot.SECRET_PATH));
-  app.get('/', async (request, reply) => {
-    // tslint:disable-next-line:no-console
-    console.log(reply.res); // this is the http.ServerResponse with correct typings!
-    return { hello: 'world' };
-  });
 };
 
-const configBot = ({bot}): void => {
+const configBot = ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): void => {
   bot.telegram.setWebhook(`${configs.bot.PUBLIC_HOST}${configs.bot.SECRET_PATH}`);
-  // const session = new RedisSession({
-  //   store: {
-  //     host: configs.redis.HOST,
-  //     port: configs.redis.PORT,
-  //     password: configs.redis.PASSWORD
-  //   }
-  // });
-  // bot.use(session);
 
-  const i18n = new TelegrafI18n({
-    useSession: true,
-    defaultLanguage: 'en',
-    allowMissing: true,
-    sessionName: 'session',
-    directory: path.resolve(__dirname, 'locales')
+  bot.use(sessionMiddleware);
+  bot.use(i18nMiddleware);
+
+  registerCommands(bot);
+  registerActions(bot);
+
+  bot.catch((err) => {
+    console.error(err);
   });
-  bot.use(i18n.middleware());
-
-  bot.on('text', ({ reply }) => reply('Hello mew mew mew'));
 };
 
 export const start = async () => {
@@ -55,7 +43,7 @@ export const start = async () => {
           return reject(error);
         }
         // tslint:disable-next-line:no-console
-        console.log(`Listening on ${address}, ${app.printRoutes()}`);
+        console.log(`Listening on ${address}`);
         return resolve();
       });
     } catch (error) {

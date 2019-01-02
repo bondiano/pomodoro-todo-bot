@@ -1,0 +1,45 @@
+{
+  "name": "pomodoro-todo-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot",
+  "main": "node dist/index.js",
+  "scripts": {
+    "start-prod": "pm2 startOrRestart ecosystem.config.js --env production",
+    "build": "yarn clean && tsc",
+    "lint": "tslint -p tsconfig.json ./src/**/*.ts",
+    "clean": "rimraf dist"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "keywords": [
+    "telegram-bot",
+    "tefegraf"
+  ],
+  "author": {
+    "name": "bondiano",
+    "email": "batbondik0@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "fastify": "^1.13.3",
+    "joi": "^14.3.1",
+    "telegraf": "^3.25.5",
+    "telegraf-i18n": "^6.4.0",
+    "telegraf-session-redis": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/joi": "^14.0.1",
+    "@types/node": "^10.12.18",
+    "pm2": "^3.2.4",
+    "rimraf": "^2.6.2",
+    "telegram-typings": "^4.0.0-beta",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.7.0",
+    "tslint": "^5.12.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.2.2"
+  }
+}

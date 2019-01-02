@@ -1,6 +1,6 @@
 const isDev = process.env.NODE_ENV !== 'production';
 
-const restServer = {
+const botServer = {
     'name': 'API',
     'script': './src/index.ts',
     'node_args': `${isDev ? '' : '-r ts-node/register '}-r tsconfig-paths/register`,
@@ -19,7 +19,7 @@ const restServer = {
 };
 
 const config = {
-    apps: [restServer]
+    apps: [botServer]
 };
 
 module.exports = config;
