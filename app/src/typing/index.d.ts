@@ -4,7 +4,6 @@ import { I18n } from 'telegraf-i18n';
 interface IUserSession {
   currentPomodoro?: {
     period?: number,
-    hasStarted?: boolean,
     currentTime?: number
   };
 }

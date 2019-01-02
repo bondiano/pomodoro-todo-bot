@@ -8,5 +8,6 @@ export const actionNames = {
 };
 
 export const commandNames = {
-  LANGUAGE: 'lang'
+  LANGUAGE: 'lang',
+  RESET_POMODORO: 'resetPomodoro'
 };
