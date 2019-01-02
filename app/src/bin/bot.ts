@@ -3,7 +3,7 @@ import { IncomingMessage, Server, ServerResponse } from 'http';
 import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
 import * as configs from '@/configs';
-import { registerActions, registerCommands } from '@/handlers';
+import { registerActions, registerCommands, registerMessages } from '@/handlers';
 import { i18nMiddleware, sessionMiddleware } from '@/middlewares';
 
 const configApp = ({ app, bot }: {
@@ -21,6 +21,7 @@ const configBot = ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): void => {
 
   registerCommands(bot);
   registerActions(bot);
+  registerMessages(bot);
 
   bot.catch((err) => {
     console.error(err);

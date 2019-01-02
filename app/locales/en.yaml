@@ -1,17 +1,47 @@
 greeting:
   "Hi! I'm **Pomodoro TODO** bot.\n\n\
   I'll help you to organize your day with using the [Pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique) and everyday TODO list.\n\n\
-  Send me /help for get more info."
+  Send me /help to getting more info."
 
 help:
   "How can I assist you today, _${from.username}_?\n\n\
-  For select language use /lang command."
+  For select language use /lang command.\n\n\
+  In case if you have any questions, feel free to ask it to my author, @bondiano!"
 
 language:
   "Select language:"
 languageSelected:
-  "Now I will use english for talking with you."
+  "Now I will use English for talking with you."
 enButton:
   "🇬🇧 English"
 ruButton:
   "🇷🇺 Russian"
+
+pomodoroButton:
+  "🍅 Pomodoro"
+todoButton:
+  "🗒 TODO"
+settingsButton:
+  "⚙️ Settings"
+
+wip:
+  "Work in progress."
+
+pomodoroWelcome:
+  "Your pomodoro timer configuration is *${configText}*.\n\
+  Start to note time?"
+pomodoroAlreadyStarted:
+  "Current pomodoro is on *${currentTime}*.\n\
+  First finish it."
+startPomodoro:
+  "Start"
+pausePomodoro:
+  "Pause"
+stopPomodoro:
+  "Stop"
+continuePomodoro:
+  "Continue"
+focusTime:
+  "Time to focus!"
+restTime:
+  "Time to get some rest!"

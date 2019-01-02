@@ -25,6 +25,7 @@
     "dotenv": "^6.2.0",
     "fastify": "^1.13.3",
     "joi": "^14.3.1",
+    "lodash": "^4.17.11",
     "telegraf": "^3.25.5",
     "telegraf-i18n": "^6.4.0",
     "telegraf-session-redis": "^5.0.0"

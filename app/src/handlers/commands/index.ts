@@ -5,7 +5,7 @@ import { languageCmdHandler } from './language';
 import { startCmdHandler } from './start';
 
 export const registerCommands = (bot) => {
-  bot.command(commandNames.START, startCmdHandler);
-  bot.command(commandNames.HELP, helpCmdHandler);
+  bot.start(startCmdHandler);
+  bot.help(helpCmdHandler);
   bot.command(commandNames.LANGUAGE, languageCmdHandler);
 };

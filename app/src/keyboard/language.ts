@@ -10,5 +10,5 @@ export default (translation: I18n): InlineKeyboardMarkup => {
     Markup.callbackButton(translation.t('ruButton'), actionNames.LANG_RU)
   ];
 
-  return Markup.inlineKeyboard([firstLine]);
+  return Markup.oneTime().inlineKeyboard([firstLine], {});
 };
