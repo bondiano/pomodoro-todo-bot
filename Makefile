@@ -2,6 +2,8 @@ start-dev:
 	docker-compose -f docker-compose.dev.yaml up
 up-dev:
 	docker-compose -f docker-compose.dev.yaml up -d
+build-dev:
+	docker-compose -f docker-compose.dev.yaml build --no-cache
 down-dev:
 	docker-compose -f docker-compose.dev.yaml down
 up:

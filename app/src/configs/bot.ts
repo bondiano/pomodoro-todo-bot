@@ -1,6 +1,4 @@
-import * as fs from 'fs';
 import * as joi from 'joi';
-import * as path from 'path';
 
 const envVarsSchema = joi.object({
   BOT_TOKEN: joi.string().required(),
@@ -26,10 +24,5 @@ const config = {
   WEBHOOK_KEY: envVars.WEBHOOK_KEY,
   WEBHOOK_CERT: envVars.WEBHOOK_CERT
 };
-
-export const tlsOptions = {
-  key: fs.readFileSync(path.resolve(config.WEBHOOK_KEY)),
-  cert: fs.readFileSync(path.resolve(config.WEBHOOK_CERT)),
-}
 
 export default config;

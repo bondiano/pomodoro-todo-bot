@@ -21,6 +21,7 @@ services:
     environment:
       - USE_DOCKER
       - "FORCE_SSL=yes"
+      - NODE_ENV=development
     env_file:
       - .env
   redis:
