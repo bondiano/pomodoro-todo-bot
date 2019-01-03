@@ -14,7 +14,6 @@ services:
     restart: on-failure
     volumes:
       - ./app:/bot
-      - /bot/node_modules
     ports:
       - "${PORT}:${PORT}"
     depends_on:
