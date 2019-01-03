@@ -18,8 +18,9 @@ services:
       - "443:443"
     restart: always
   bot:
-    context: .
-    dockerfile: Dockerfile.production
+    build:
+      context: .
+      dockerfile: Dockerfile.production
     command: ["--env", "production"]
     container_name: pomodoro-todo-bot_node
     restart: on-failure
