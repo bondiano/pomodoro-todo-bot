@@ -15,7 +15,7 @@ services:
     volumes:
       - ./app:/bot
     ports:
-      - "${PORT}:${PORT}"
+      - "${WEBHOOK_PORT}:${WEBHOOK_PORT}"
     depends_on:
       - redis
     environment:

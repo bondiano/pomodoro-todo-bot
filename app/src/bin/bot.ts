@@ -1,5 +1,6 @@
 import * as fastify from 'fastify';
 import { IncomingMessage, Server, ServerResponse } from 'http';
+import https from 'https';
 import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
 import * as configs from '@/configs';
@@ -10,12 +11,12 @@ const configApp = ({ app, bot }: {
   app: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse>,
   bot: Telegraf<ContextMessageUpdate>
 }): void => {
-  app.use(bot.webhookCallback(configs.bot.SECRET_PATH));
+  app.use(bot.webhookCallback(configs.bot.WEBHOOK_PATH));
 };
 
-const configBot = ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): void => {
-  bot.telegram.setWebhook(`${configs.bot.PUBLIC_HOST}${configs.bot.SECRET_PATH}`);
-
+const configBot = ({ bot, app }: { bot: Telegraf<ContextMessageUpdate>, app}): void => {
+  bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`);
+  https.createServer(configs.tlsOptions, app).listen(configs.bot.WEBHOOK_PORT, configs.bot.WEBHOOK_DOMAIN);
   bot.use(sessionMiddleware);
   bot.use(i18nMiddleware);
 
@@ -36,15 +37,15 @@ export const start = async () => {
         logger: true
       });
 
-      configApp({app, bot});
-      configBot({bot});
+      configApp({ app, bot });
+      configBot({ bot, app });
 
-      app.listen(configs.bot.PORT, configs.bot.HOST, (error, address) => {
+      app.listen(configs.bot.WEBHOOK_PORT, configs.bot.HOST, (error, address) => {
         if (error) {
           return reject(error);
         }
         // tslint:disable-next-line:no-console
-        console.log(`Listening from ${__dirname} on ${address}`);
+        console.log(`Listening on ${address}`);
         return resolve();
       });
     } catch (error) {
