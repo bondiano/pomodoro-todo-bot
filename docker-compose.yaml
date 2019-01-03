@@ -11,7 +11,7 @@ services:
     environment:
       - "CERT_FOLDER=/certs/"
       - "EXTRA_GLOBAL_SETTINGS=tune.ssl.default-dh-param 2048"
-      - "RSYSLOG_DESTINATION=${LOGGER_URL}"
+      - "RSYSLOG_DESTINATION=${LOGGER}"
       - "LOGSPOUT=ignore"
     ports:
       - "80:80"
@@ -46,7 +46,7 @@ services:
     image: gliderlabs/logspout:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: 'syslog+tls://${LOGGER_URL}'
+    command: 'syslog+tls://${LOGGER}'
     restart: always
 volumes:
   data:
