@@ -44,7 +44,7 @@ export const start = async () => {
           return reject(error);
         }
         // tslint:disable-next-line:no-console
-        console.log(`Listening on ${address}`);
+        console.log(`Listening from ${__dirname} on ${address}`);
         return resolve();
       });
     } catch (error) {

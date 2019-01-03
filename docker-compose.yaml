@@ -11,6 +11,7 @@ services:
     volumes:
       - ./app:/bot
       - /bot/node_modules
+      - /bot/dist
     ports:
       - "${PORT}:${PORT}"
     depends_on:
@@ -18,6 +19,7 @@ services:
     environment:
       - USE_DOCKER
       - "FORCE_SSL=yes"
+      - NODE_ENV=production
     env_file:
       - .env
   redis:
