@@ -1,4 +1,4 @@
-mport * as joi from 'joi';
+import * as joi from 'joi';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
