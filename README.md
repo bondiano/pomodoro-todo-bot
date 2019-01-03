@@ -4,7 +4,7 @@
 
 ## How to use existing bot
 
-Find @pomodoroTodo_bot on Telegram or follow this [link](t.me/pomodoroTodo_bot).
+Find @pomodoroTodo_bot on Telegram or follow this [link](https://t.me/pomodoroTodo_bot).
 
 ## For local develop
 * Install [ngrock](https://ngrok.com/) and get https address on port (I used `ngrock https port`).
