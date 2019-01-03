@@ -1,5 +1,4 @@
 dist
-data/*
 swagger-dist
 doc
 node_modules
