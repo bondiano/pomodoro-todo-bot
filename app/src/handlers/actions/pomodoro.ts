@@ -1,5 +1,5 @@
-import { pausePomodoroExtra } from '@/extra';
-import { pausePomodoroKeyboard, stopPomodoroKeyboard } from '@/keyboard';
+import { pausePomodoroExtra } from '@/extras';
+import { pausePomodoroKeyboard, stopPomodoroKeyboard } from '@/keyboards';
 import { forceSaveSession, getSessionKey } from '@/middlewares/session';
 import { IBotContext } from '@/typing';
 import { millisToMinutesAndSeconds } from '@/utils';

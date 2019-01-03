@@ -1,4 +1,4 @@
-import { languageExtra } from '@/extra';
+import { languageExtra } from '@/extras';
 import { IBotContext } from '@/typing';
 
 export const languageCmdHandler = async ({ replyWithMarkdown, i18n }: IBotContext) => {

@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 
-import { startPomodoroExtra } from '@/extra';
+import { startPomodoroExtra } from '@/extras';
 import { IBotContext } from '@/typing';
 import { millisToMinutesAndSeconds } from '@/utils';
 
