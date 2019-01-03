@@ -1,6 +1,4 @@
-import * as fs from 'fs';
-import * as joi from 'joi';
-import * as path from 'path';
+mport * as joi from 'joi';
 
 const isDev = process.env.NODE_ENV !== 'production';
 
@@ -30,8 +28,8 @@ const config = {
 };
 
 export const tlsOptions = {
-  key: !isDev && fs.readFileSync(path.resolve(config.WEBHOOK_KEY)),
-  cert: !isDev && fs.readFileSync(path.resolve(config.WEBHOOK_CERT)),
+  key: !isDev && config.WEBHOOK_KEY,
+  cert: !isDev && config.WEBHOOK_CERT,
 }
 
 export default config;

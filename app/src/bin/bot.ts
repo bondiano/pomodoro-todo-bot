@@ -14,14 +14,14 @@ const configApp = ({ app, bot }: {
 
   app.get('/webhook', async (_, reply) => {
     const data = await bot.telegram.getWebhookInfo();
-    reply.send({ data});
+    reply.send({ data });
   });
 };
 
 const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): Promise<void> => {
   try {
     await bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`, {
-      source: configs.tlsOptions.cert
+      source: `@/${configs.tlsOptions.cert}`
     });
     bot.use(sessionMiddleware);
     bot.use(i18nMiddleware);
