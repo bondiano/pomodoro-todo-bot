@@ -17,8 +17,6 @@ services:
       - "80:80"
       - "443:443"
     restart: always
-    networks:
-      - web
   bot:
     build:
       context: .
@@ -39,8 +37,6 @@ services:
       - "SERVICE_PORTS=${PORT}"
     env_file:
       - .env
-    networks:
-      - web
   redis:
     image: redis:5.0.3-alpine
     command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
@@ -56,8 +52,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     command: 'syslog+tls://${LOGGER}'
     restart: always
-    networks:
-      - web
 volumes:
   data:
     driver: local
