@@ -11,20 +11,25 @@ const configApp = ({ app, bot }: {
   bot: Telegraf<ContextMessageUpdate>
 }): void => {
   app.use(bot.webhookCallback(configs.bot.WEBHOOK_PATH));
+
+  app.get('/webhook', async (_, reply) => {
+    const data = await bot.telegram.getWebhookInfo();
+    reply.send({ data});
+  });
 };
 
-const configBot = ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): void => {
-  bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`);
-  bot.use(sessionMiddleware);
-  bot.use(i18nMiddleware);
+const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): Promise<void> => {
+  try {
+    await bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`);
+    bot.use(sessionMiddleware);
+    bot.use(i18nMiddleware);
 
-  registerCommands(bot);
-  registerActions(bot);
-  registerMessages(bot);
-
-  bot.catch((err) => {
-    console.error(err);
-  });
+    registerCommands(bot);
+    registerActions(bot);
+    registerMessages(bot);
+  } catch(error) {
+    console.error(error);
+  }
 };
 
 export const start = async () => {
@@ -36,7 +41,7 @@ export const start = async () => {
       });
 
       configApp({ app, bot });
-      configBot({ bot, app });
+      await configBot({ bot, app });
 
       app.listen(configs.bot.WEBHOOK_PORT, configs.bot.HOST, (error, address) => {
         if (error) {
