@@ -27,7 +27,8 @@
     "lodash": "^4.17.11",
     "telegraf": "^3.25.5",
     "telegraf-i18n": "^6.4.0",
-    "telegraf-session-redis": "^5.0.0"
+    "telegraf-session-redis": "^5.0.0",
+    "tsconfig-paths": "^3.7.0"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
@@ -37,7 +38,6 @@
     "rimraf": "^2.6.2",
     "telegram-typings": "^4.0.0-beta",
     "ts-node": "^7.0.1",
-    "tsconfig-paths": "^3.7.0",
     "tslint": "^5.12.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.2.2"
