@@ -1,6 +1,6 @@
-import fs from 'fs';
+import * as fs from 'fs';
 import * as joi from 'joi';
-import path from 'path';
+import * as path from 'path';
 
 const envVarsSchema = joi.object({
   BOT_TOKEN: joi.string().required(),

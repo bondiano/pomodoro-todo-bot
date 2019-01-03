@@ -1,6 +1,6 @@
 import * as fastify from 'fastify';
 import { IncomingMessage, Server, ServerResponse } from 'http';
-import https from 'https';
+import * as https from 'https';
 import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
 import * as configs from '@/configs';
