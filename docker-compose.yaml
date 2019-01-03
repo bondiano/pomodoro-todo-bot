@@ -35,7 +35,7 @@ services:
       - USE_DOCKER
       - "FORCE_SSL=yes"
       - "SERVICE_PORTS=${PORT}"
-      - "VIRTUAL_HOST="${HOST}"
+      - "VIRTUAL_HOST=${HOST}"
     env_file:
       - .env
   redis:
