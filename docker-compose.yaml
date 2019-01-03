@@ -1,22 +1,6 @@
 version: '3'
 
 services:
-  haproxy:
-    image: dockercloud/haproxy:1.6.2
-    links:
-      - bot
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./certs/cert0.pem:/certs/cert0.pem
-    environment:
-      - "CERT_FOLDER=/certs/"
-      - "EXTRA_GLOBAL_SETTINGS=tune.ssl.default-dh-param 2048"
-      - "RSYSLOG_DESTINATION=${LOGGER}"
-      - "LOGSPOUT=ignore"
-    ports:
-      - "80:80"
-      - "443:443"
-    restart: always
   bot:
     build:
       context: .
@@ -34,8 +18,6 @@ services:
     environment:
       - USE_DOCKER
       - "FORCE_SSL=yes"
-      - SERVICE_PORTS="${PORT}"
-      - VIRTUAL_HOST="${HOST}"
     env_file:
       - .env
   redis:
@@ -54,8 +36,7 @@ services:
     command: 'syslog+tls://${LOGGER}'
     restart: always
 volumes:
+  # for persistence between restarts
+  redis-data: {}
   data:
     driver: local
-networks:
-  web:
-    driver: overlay
