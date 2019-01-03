@@ -20,7 +20,9 @@ const configApp = ({ app, bot }: {
 
 const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): Promise<void> => {
   try {
-    await bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`);
+    await bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`, {
+      source: configs.tlsOptions.cert
+    });
     bot.use(sessionMiddleware);
     bot.use(i18nMiddleware);
 

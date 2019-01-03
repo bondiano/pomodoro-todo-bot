@@ -1,4 +1,8 @@
+import * as fs from 'fs';
 import * as joi from 'joi';
+import * as path from 'path';
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 const envVarsSchema = joi.object({
   BOT_TOKEN: joi.string().required(),
@@ -24,5 +28,10 @@ const config = {
   WEBHOOK_KEY: envVars.WEBHOOK_KEY,
   WEBHOOK_CERT: envVars.WEBHOOK_CERT
 };
+
+export const tlsOptions = {
+  key: !isDev && fs.readFileSync(path.resolve(config.WEBHOOK_KEY)),
+  cert: !isDev && fs.readFileSync(path.resolve(config.WEBHOOK_CERT)),
+}
 
 export default config;
