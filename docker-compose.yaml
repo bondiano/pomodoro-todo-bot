@@ -7,11 +7,11 @@ services:
       - bot
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/certs/cert0.pem:/certs/cert0.pem
+      - ./certs/cert0.pem:/certs/cert0.pem
     environment:
       - "CERT_FOLDER=/certs/"
       - "EXTRA_GLOBAL_SETTINGS=tune.ssl.default-dh-param 2048"
-      - "RSYSLOG_DESTINATION=logsX.papertrailapp.com:PORT"
+      - "RSYSLOG_DESTINATION=${LOGGER_URL}"
       - "LOGSPOUT=ignore"
     ports:
       - "80:80"
@@ -28,7 +28,6 @@ services:
       - "${PORT}:${PORT}"
     depends_on:
       - redis
-      - haproxy
     environment:
       - USE_DOCKER
       - "FORCE_SSL=yes"
@@ -40,7 +39,7 @@ services:
     container_name: pomodoro-todo-bot_redis
     hostname: redis
     volumes:
-      - data:/data/redis
+      - ./data:/data/redis
     ports:
       - "${REDIS_PORT}:6379"
   logger:
