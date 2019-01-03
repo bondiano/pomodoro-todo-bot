@@ -1,19 +1,17 @@
 const isDev = process.env.NODE_ENV !== 'production';
 
 const botServer = {
-    'name': 'API',
-    'script': './src/index.ts',
-    'node_args': `${isDev ? '' : '-r ts-node/register '}-r tsconfig-paths/register`,
+    'name': 'pomodoro-todo-bot',
     'exec_mode': 'cluster',
-    'watch': ['./src'],
+    'node_args': `${isDev ? '' : '-r ts-node/register '}-r tsconfig-paths/register`,
+    'script': isDev ? './src/index.ts' : './dist/index.js',
     'env_development': {
+        'watch': ['./src', './locales'],
         'NODE_ENV': 'development',
         'source_map_support': true
     },
-    env_stage: {
-        NODE_ENV: 'stage'
-    },
     'env_production': {
+        watch: false,
         'NODE_ENV': 'production'
     }
 };

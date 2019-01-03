@@ -9,7 +9,7 @@ volumes:
 services:
   bot:
     build: .
-    command: ["--only", "API"]
+    command: ["--env", "development"]
     container_name: pomodoro-todo-bot_node
     restart: on-failure
     volumes:

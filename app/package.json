@@ -4,7 +4,6 @@
   "description": "Telegram bot",
   "main": "node dist/index.js",
   "scripts": {
-    "start-prod": "pm2 startOrRestart ecosystem.config.js --env production",
     "build": "yarn clean && tsc",
     "lint": "tslint -p tsconfig.json ./src/**/*.ts",
     "clean": "rimraf dist"

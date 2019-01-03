@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  haproxy:
+    image: dockercloud/haproxy:1.6.2
+    links:
+      - bot
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/certs/cert0.pem:/certs/cert0.pem
+    environment:
+      - "CERT_FOLDER=/certs/"
+      - "EXTRA_GLOBAL_SETTINGS=tune.ssl.default-dh-param 2048"
+      - "RSYSLOG_DESTINATION=logsX.papertrailapp.com:PORT"
+      - "LOGSPOUT=ignore"
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+  bot:
+    build: ./Dockerfile.production
+    command: ["--env", "production"]
+    container_name: pomodoro-todo-bot_node
+    restart: on-failure
+    volumes:
+      - ./app:/bot
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - redis
+      - haproxy
+    environment:
+      - USE_DOCKER
+      - "FORCE_SSL=yes"
+    env_file:
+      - .env
+  redis:
+    image: redis:5.0.3-alpine
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
+    container_name: pomodoro-todo-bot_redis
+    hostname: redis
+    volumes:
+      - data:/data/redis
+    ports:
+      - "${REDIS_PORT}:6379"
+  logger:
+    image: gliderlabs/logspout:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: 'syslog+tls://${LOGGER_URL}'
+    restart: always
+volumes:
+  data:
+    driver: local
