@@ -1,6 +1,5 @@
 import * as fastify from 'fastify';
 import { IncomingMessage, Server, ServerResponse } from 'http';
-import * as https from 'https';
 import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
 import * as configs from '@/configs';
@@ -14,9 +13,8 @@ const configApp = ({ app, bot }: {
   app.use(bot.webhookCallback(configs.bot.WEBHOOK_PATH));
 };
 
-const configBot = ({ bot, app }: { bot: Telegraf<ContextMessageUpdate>, app}): void => {
+const configBot = ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): void => {
   bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`);
-  https.createServer(configs.tlsOptions, app).listen(configs.bot.WEBHOOK_PORT, configs.bot.WEBHOOK_DOMAIN);
   bot.use(sessionMiddleware);
   bot.use(i18nMiddleware);
 
