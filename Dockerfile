@@ -6,7 +6,7 @@ COPY app /bot
 
 WORKDIR /bot
 
-RUN npm install yarn -g
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 RUN yarn install --network-timeout 100000
 RUN yarn global add pm2 ts-node typescript --network-timeout 100000
