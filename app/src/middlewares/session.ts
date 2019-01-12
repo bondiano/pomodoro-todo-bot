@@ -5,12 +5,12 @@ import { IBotContext } from '@/typing';
 
 export const getSessionKey = (ctx) => {
   if (ctx.from && ctx.chat) {
-    return `${ctx.from.id}:${ctx.chat.id}`
+    return `${ctx.from.id}:${ctx.chat.id}`;
   } else if (ctx.from && ctx.inlineQuery) {
-    return `${ctx.from.id}:${ctx.from.id}`
+    return `${ctx.from.id}:${ctx.from.id}`;
   }
-  return null
-}
+  return null;
+};
 
 const session = new RedisSession({
   store: {

@@ -30,6 +30,6 @@ const config = {
 export const tlsOptions = {
   key: !isDev && config.WEBHOOK_KEY,
   cert: !isDev && config.WEBHOOK_CERT,
-}
+};
 
 export default config;
