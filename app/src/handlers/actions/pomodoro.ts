@@ -14,10 +14,10 @@ const activeIntervals = {};
 
 const intervalHandler = async (ctx: IBotContext) => {
   if (ctx.session.currentPomodoro.currentTime <= 0) {
-    if (ctx.session.currentPomodoro.period > timerPeriods.length) {
+    ctx.session.currentPomodoro.period++;
+
+    if (ctx.session.currentPomodoro.period >= timerPeriods.length) {
       ctx.session.currentPomodoro.period = 0;
-    } else {
-      ctx.session.currentPomodoro.period++;
     }
 
     if (ctx.session.currentPomodoro.period % 2) {
@@ -30,7 +30,7 @@ const intervalHandler = async (ctx: IBotContext) => {
   }
   await ctx.editMessageText(millisToMinutesAndSeconds(ctx.session.currentPomodoro.currentTime), pausePomodoroExtra(ctx.i18n));
   ctx.session.currentPomodoro.currentTime -= INTERVAL_DURATION;
-  await forceSaveSession(ctx);
+  await forceSaveSession(ctx, ctx.session);
 };
 
 const startPomodoro = async (ctx: IBotContext) => {
