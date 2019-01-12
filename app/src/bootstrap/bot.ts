@@ -11,6 +11,11 @@ const configApp = ({ app, bot }: {
   bot: Telegraf<ContextMessageUpdate>
 }): void => {
   app.use(bot.webhookCallback(configs.bot.WEBHOOK_PATH));
+
+  app.get('/webhook', async (_, reply) => {
+    const data = await bot.telegram.getWebhookInfo();
+    reply.send({ data });
+  });
 };
 
 const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): Promise<void> => {
