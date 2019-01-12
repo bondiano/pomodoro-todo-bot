@@ -8,7 +8,6 @@ const envVarsSchema = joi.object({
   HOST: joi.string().required(),
   WEBHOOK_PATH: joi.string().required(),
   WEBHOOK_PORT: joi.string(),
-  WEBHOOK_KEY: joi.string(),
   WEBHOOK_CERT: joi.string()
 }).unknown().required();
 
@@ -26,7 +25,6 @@ const config = {
 };
 
 export const tlsOptions = {
-  key: !isDev && envVars.WEBHOOK_KEY,
   cert: !isDev && envVars.WEBHOOK_CERT,
 };
 

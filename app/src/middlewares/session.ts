@@ -21,7 +21,7 @@ const session = new RedisSession({
   getSessionKey
 });
 
-export const forceSaveSession = (ctx: IBotContext) =>
-  session.saveSession(session.options.getSessionKey(ctx), ctx.session);
+export const forceSaveSession = (ctx: IBotContext, newSession: IBotContext['session']) =>
+  session.saveSession(session.options.getSessionKey(ctx), newSession);
 
 export default session.middleware();
