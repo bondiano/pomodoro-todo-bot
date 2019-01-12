@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import * as RedisSession from 'telegraf-session-redis';
 
 import * as configs from '@/configs';
@@ -23,5 +24,12 @@ const session = new RedisSession({
 
 export const forceSaveSession = (ctx: IBotContext, newSession: IBotContext['session']) =>
   session.saveSession(session.options.getSessionKey(ctx), newSession);
+
+export const forceUpdateSession = async (ctx, updateObject: object) => {
+  const sessionKey = session.options.getSessionKey(ctx);
+  const currentSession = await session.getSession(sessionKey);
+  const newSession = merge(currentSession, updateObject);
+  return session.saveSession(sessionKey, newSession);
+};
 
 export default session.middleware();

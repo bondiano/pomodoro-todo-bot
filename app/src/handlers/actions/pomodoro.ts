@@ -1,6 +1,6 @@
 import { pausePomodoroExtra } from '@/extras';
 import { pausePomodoroKeyboard, stopPomodoroKeyboard } from '@/keyboards';
-import { forceSaveSession, getSessionKey } from '@/middlewares/session';
+import { forceUpdateSession, getSessionKey } from '@/middlewares/session';
 import { IBotContext } from '@/typing';
 import { getActionType, millisToMinutesAndSeconds } from '@/utils';
 
@@ -30,7 +30,7 @@ const intervalHandler = async (ctx: IBotContext) => {
   }
   await ctx.editMessageText(millisToMinutesAndSeconds(ctx.session.currentPomodoro.currentTime), pausePomodoroExtra(ctx.i18n));
   ctx.session.currentPomodoro.currentTime -= INTERVAL_DURATION;
-  await forceSaveSession(ctx, ctx.session);
+  await forceUpdateSession(ctx, { currentPomodoro: { currentTime: ctx.session.currentPomodoro.currentTime }});
 };
 
 const startPomodoro = async (ctx: IBotContext) => {
