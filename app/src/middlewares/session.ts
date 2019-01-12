@@ -22,10 +22,7 @@ const session = new RedisSession({
   getSessionKey
 });
 
-export const forceSaveSession = (ctx: IBotContext, newSession: IBotContext['session']) =>
-  session.saveSession(session.options.getSessionKey(ctx), newSession);
-
-export const forceUpdateSession = async (ctx, updateObject: object) => {
+export const forceUpdateSession = async (ctx: IBotContext, updateObject: object) => {
   const sessionKey = session.options.getSessionKey(ctx);
   const currentSession = await session.getSession(sessionKey);
   const newSession = merge(currentSession, updateObject);
