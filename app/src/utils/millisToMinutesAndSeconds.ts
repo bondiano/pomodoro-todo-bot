@@ -1,3 +1,6 @@
+/**
+ * Function for convert milliseconds to format like 00:00, worked with negative numbers.
+ */
 export default (milis: number) => {
   const minus = milis < 0 ? '-' : '';
   const absMilis = Math.abs(milis);

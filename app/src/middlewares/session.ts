@@ -3,7 +3,7 @@ import * as RedisSession from 'telegraf-session-redis';
 import * as configs from '@/configs';
 import { IBotContext } from '@/typing';
 
-export const getSessionKey = (ctx) => {
+export const getSessionKey = (ctx: IBotContext) => {
   if (ctx.from && ctx.chat) {
     return `${ctx.from.id}:${ctx.chat.id}`;
   } else if (ctx.from && ctx.inlineQuery) {

@@ -2,10 +2,14 @@ import { pausePomodoroExtra } from '@/extras';
 import { pausePomodoroKeyboard, stopPomodoroKeyboard } from '@/keyboards';
 import { forceSaveSession, getSessionKey } from '@/middlewares/session';
 import { IBotContext } from '@/typing';
-import { millisToMinutesAndSeconds } from '@/utils';
+import { getActionType, millisToMinutesAndSeconds } from '@/utils';
 
+// TODO: Use periods set by user
 const timerPeriods = [25 * 60 * 1000, 5 * 60 * 1000, 25 * 60 * 1000, 5 * 60 * 1000, 25 * 60 * 1000, 15 * 60 * 1000];
+
+/** Interval between update message with timer */
 const INTERVAL_DURATION = 1000;
+/** Container for pomodoro timers by sessionKeys */
 const activeIntervals = {};
 
 const intervalHandler = async (ctx: IBotContext) => {
@@ -79,7 +83,7 @@ export const pomodoroActionHandler = async (ctx: IBotContext) => {
     ctx.session.currentPomodoro = {};
   }
 
-  const [, type] = ctx.update.callback_query.data.split('/');
+  const type = getActionType(ctx);
   const actionHandler = actionByType[type];
   await actionHandler(ctx);
 };

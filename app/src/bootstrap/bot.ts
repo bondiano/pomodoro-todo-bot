@@ -11,14 +11,9 @@ const configApp = ({ app, bot }: {
   bot: Telegraf<ContextMessageUpdate>
 }): void => {
   app.use(bot.webhookCallback(configs.bot.WEBHOOK_PATH));
-
-  app.get('/webhook', async (_, reply) => {
-    const data = await bot.telegram.getWebhookInfo();
-    reply.send({ data });
-  });
 };
 
-const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>, app}): Promise<void> => {
+const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): Promise<void> => {
   try {
     await bot.telegram.setWebhook(`${configs.bot.WEBHOOK_DOMAIN}${configs.bot.WEBHOOK_PATH}`, {
       source: `@/${configs.tlsOptions.cert}`
@@ -43,7 +38,7 @@ export const start = async () => {
       });
 
       configApp({ app, bot });
-      await configBot({ bot, app });
+      await configBot({ bot });
 
       app.listen(configs.bot.WEBHOOK_PORT, configs.bot.HOST, (error, address) => {
         if (error) {
