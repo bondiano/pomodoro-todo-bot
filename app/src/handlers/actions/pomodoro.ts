@@ -30,7 +30,12 @@ const intervalHandler = async (ctx: IBotContext) => {
   }
   await ctx.editMessageText(millisToMinutesAndSeconds(ctx.session.currentPomodoro.currentTime), pausePomodoroExtra(ctx.i18n));
   ctx.session.currentPomodoro.currentTime -= INTERVAL_DURATION;
-  await forceUpdateSession(ctx, { currentPomodoro: { currentTime: ctx.session.currentPomodoro.currentTime }});
+  await forceUpdateSession(ctx, {
+    currentPomodoro: {
+      currentTime: ctx.session.currentPomodoro.currentTime,
+      period: ctx.session.currentPomodoro.period
+    }
+  });
 };
 
 const startPomodoro = async (ctx: IBotContext) => {

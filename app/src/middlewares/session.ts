@@ -22,11 +22,12 @@ const session = new RedisSession({
   getSessionKey
 });
 
+const getCurrentSession = async (ctx: IBotContext) => session.getSession(session.options.getSessionKey(ctx));
+
 export const forceUpdateSession = async (ctx: IBotContext, updateObject: object) => {
-  const sessionKey = session.options.getSessionKey(ctx);
-  const currentSession = await session.getSession(sessionKey);
+  const currentSession = await getCurrentSession(ctx);
   const newSession = merge(currentSession, updateObject);
-  return session.saveSession(sessionKey, newSession);
+  return session.saveSession(session.options.getSessionKey(ctx), newSession);
 };
 
 export default session.middleware();
