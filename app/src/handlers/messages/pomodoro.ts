@@ -14,4 +14,4 @@ export const pomodoroMessageHandler = async ({ replyWithMarkdown, i18n, session 
       configText: '25-5-15'
     }), startPomodoroExtra(i18n));
   }
-}
+};

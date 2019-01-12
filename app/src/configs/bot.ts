@@ -22,14 +22,12 @@ const config = {
   HOST: envVars.HOST,
   WEBHOOK_PORT: Number(envVars.WEBHOOK_PORT),
   WEBHOOK_PATH: envVars.WEBHOOK_PATH,
-  WEBHOOK_DOMAIN: envVars.WEBHOOK_DOMAIN,
-  WEBHOOK_KEY: envVars.WEBHOOK_KEY,
-  WEBHOOK_CERT: envVars.WEBHOOK_CERT
+  WEBHOOK_DOMAIN: envVars.WEBHOOK_DOMAIN
 };
 
 export const tlsOptions = {
-  key: !isDev && config.WEBHOOK_KEY,
-  cert: !isDev && config.WEBHOOK_CERT,
+  key: !isDev && envVars.WEBHOOK_KEY,
+  cert: !isDev && envVars.WEBHOOK_CERT,
 };
 
 export default config;

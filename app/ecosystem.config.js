@@ -4,7 +4,7 @@ const botServer = {
     'name': 'pomodoro-todo-bot',
     'exec_mode': 'cluster',
     'node_args': `${isDev ? '' : '-r ts-node/register '}-r tsconfig-paths/register`,
-    'script': isDev ? './src/index.ts' : './dist/index.js',
+    'script': isDev ? './src/bin/bot.ts' : './dist/bin/bot.js',
     'env_development': {
         'watch': ['./src', './locales'],
         'NODE_ENV': 'development',
