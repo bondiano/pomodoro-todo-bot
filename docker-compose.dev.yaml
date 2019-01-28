@@ -33,3 +33,10 @@ services:
       - redis-data:/data
     ports:
       - "${REDIS_PORT}:6379"
+  mongo:
+    container_name: pomodoro-todo-bot_mongo
+    image: mongo:latest
+    volumes:
+      - ./data/mongo:/data/mongo
+    ports:
+      - "${MONGO_DB_PORT}:27017"

@@ -1,5 +1,11 @@
 version: '3'
 
+volumes:
+  # for persistence between restarts
+  redis-data: {}
+  data:
+    driver: local
+
 services:
   bot:
     build:
@@ -28,17 +34,19 @@ services:
     container_name: pomodoro-todo-bot_redis
     hostname: redis
     volumes:
-      - ./data:/data/redis
+      - ./data/redis:/data/redis
     ports:
       - "${REDIS_PORT}:6379"
+  mongo:
+    container_name: pomodoro-todo-bot_mongo
+    image: mongo:latest
+    volumes:
+      - ./data/mongo:/data/mongo
+    ports:
+      - "${MONGO_DB_PORT}:27017"
   logger:
     image: gliderlabs/logspout:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: 'syslog+tls://${LOGGER}'
     restart: always
-volumes:
-  # for persistence between restarts
-  redis-data: {}
-  data:
-    driver: local

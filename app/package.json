@@ -25,6 +25,7 @@
     "fastify": "^1.13.3",
     "joi": "^14.3.1",
     "lodash": "^4.17.11",
+    "mongoose": "^5.4.7",
     "telegraf": "^3.25.5",
     "telegraf-i18n": "^6.4.0",
     "telegraf-session-redis": "^5.0.0",
@@ -33,6 +34,8 @@
   "devDependencies": {
     "@types/dotenv": "^6.1.0",
     "@types/joi": "^14.0.1",
+    "@types/mongodb": "^3.1.19",
+    "@types/mongoose": "^5.3.10",
     "@types/node": "^10.12.18",
     "pm2": "^3.2.4",
     "rimraf": "^2.6.2",
