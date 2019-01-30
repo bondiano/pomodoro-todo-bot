@@ -4,7 +4,8 @@ import mongodb from '@/bootstrap/mongodb';
 
 const { Schema, model } = mongodb;
 
-interface IUserModel extends Document {
+export interface IUserModel extends Document {
+  telegramId: number;
   config: {
     timerDuration: {
       focus: number;
@@ -23,6 +24,10 @@ interface IUserModel extends Document {
 }
 
 const userSchema = new Schema({
+  telegramId: {
+    type: Number,
+    required: true
+  },
   config: {
     timerDuration: {
       focus: {

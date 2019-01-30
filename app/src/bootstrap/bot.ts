@@ -4,7 +4,7 @@ import Telegraf, { ContextMessageUpdate } from 'telegraf';
 
 import * as configs from '@/configs';
 import { registerActions, registerCommands, registerMessages } from '@/handlers';
-import { i18nMiddleware, sessionMiddleware } from '@/middlewares';
+import { authMiddleware, i18nMiddleware, sessionMiddleware } from '@/middlewares';
 
 const configApp = ({ app, bot }: {
   app: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse>,
@@ -25,6 +25,7 @@ const configBot = async ({ bot }: { bot: Telegraf<ContextMessageUpdate>}): Promi
     });
     bot.use(sessionMiddleware);
     bot.use(i18nMiddleware);
+    bot.use(authMiddleware);
 
     registerCommands(bot);
     registerActions(bot);
